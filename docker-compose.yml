@@ -1,0 +1,19 @@
+version: "3"
+services:
+  ubuntu:
+    # image: ubuntu:24.04
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - KERNEL_VERSION=5.10.47
+    container_name: ubuntu2404
+    privileged: true
+    volumes:
+      - /usr/src:/usr/src:ro
+      - /lib/modules:/lib/modules:ro
+      # - debugfs:/sys/kernel/debug:rw
+      # - /sys/kernel/btf/vmlinux:/sys/kernel/btf/vmlinux:ro
+      - ./workspace:/workspace
+    tty: true
+    working_dir: /workspace
